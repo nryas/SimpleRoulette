@@ -21,6 +21,11 @@ void ofApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
+void ofApp::mousePressed(int x, int y, int button){
+    
+}
+
+//--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
 
 }
