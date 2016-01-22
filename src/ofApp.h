@@ -23,13 +23,14 @@ class ofApp : public ofBaseApp{
             char major;
             string name;
         };
-    
+
         vector<Student> students;
-    
+
         PanelSingle *grade;
         PanelSingle *major;
         PanelName   *name;
-    
+
         bool isStopped;
         bool isSpeedup;
+
 };

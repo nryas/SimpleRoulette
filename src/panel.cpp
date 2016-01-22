@@ -9,92 +9,53 @@
 #include "panel.hpp"
 
 //--------------------------------------------------------------
-PanelSingle::PanelSingle(string imgPath, int x, int y, float width, float height) {
-    this->img.load(imgPath);
-    this->position = ofVec2f(x, y);
-    this->cropPosition = ofVec4f(position.x, position.y, position.x+width, position.y+height);
-    this->width = width;
-    this->height = height;
-    velocity = 0.1f;
+PanelSingle::PanelSingle(string _imgPath, int _x, int _y, float _width, float _height) {
+    
+    img.load(_imgPath);
+    position = ofVec2f(_x, _y);
+    
+    width  = _width;
+    height = _height;
+    velocity = 0.4f;
 }
 
 void PanelSingle::update() {
-    
+    position.y += velocity;
 }
 
 void PanelSingle::draw() {
-    if (cropPosition.z > img.getHeight()) {
-        
-        // クロップ終了位置が画像の下端を下回った場合，はみ出た部分が上に来るよう画像を加工
-        auto pixels = img.getPixels();
-        unsigned char new_pixels[sizeof(pixels) / sizeof(unsigned char)];
-        int exceedHeight = (int)floor(cropPosition.w) - img.getHeight();
-        
-        for (int h = exceedHeight; h < img.getHeight(); h++) {
-            for (int w = 0; w < img.getWidth(); w++) {
-                int index = h*img.getWidth()*3 + w*3;
-                new_pixels[index-exceedHeight*w] = pixels[index];
-            }
-        }
-        
-        for (int h = 0; h < exceedHeight; h++) {
-            for (int w = 0; w < img.getWidth(); w++) {
-                int index = h*img.getWidth()*3 + w*3;
-                new_pixels[index+exceedHeight*w] = pixels[index];
-            }
-        }
-        
-        // クロップ開始位置が画像の下端を下回った場合，デフォルトの位置に移動
-        if (cropPosition.w > img.getHeight()) {
-            cropPosition = ofVec4f(0, 0, width, height);
-        }
-        
-        ofImage new_img;
-        new_img.setFromPixels(new_pixels, img.getWidth(), img.getHeight(), OF_IMAGE_COLOR);
-        new_img.draw(position, width, height);
-    }
-    
-    // 問題なくクロップできる場合
-    else {
-        img.crop(cropPosition.x, cropPosition.y, cropPosition.z, cropPosition.w);
-        img.draw(position, width, height);
+    auto n_panel = c_panel > 0 ? 1 : 0;
+    if (position.y < ofGetHeight()) {
+        fbo[c_panel].draw(position.x, position.y);
+        fbo[n_panel].draw(position.x, position.y - height);
+    } else {
+        auto buff = c_panel;
+        c_panel = n_panel;
+        n_panel = buff;
+        position.y -= height;
+        fbo[c_panel].draw(position.x, position.y - height);
+        fbo[n_panel].draw(position.x, position.y);
     }
 }
 
 void PanelSingle::speedup() {
-    velocity += 0.1;
+    velocity += 0.4;
 }
 
 void PanelSingle::slowdown() {
-    if (velocity > 0.1) {
-        velocity -= 0.1;
+    if (velocity > 0.4) {
+        velocity -= 0.4;
     } else {
         velocity = 0;
     }
 }
 
-float PanelSingle::getVelocity() {
-    return velocity;
+void PanelSingle::start() {
+    
 }
 
-ofVec2f PanelSingle::getPosition() {
-    return position;
-}
-
-float PanelSingle::getWidth() {
-    return width;
-}
-
-float PanelSingle::getHeight() {
-    return height;
-}
-
-void PanelSingle::setCropPosition(ofVec4f pos) {
-    cropPosition = pos;
-}
-
-ofVec4f PanelSingle::getCropPosition() {
-    return cropPosition;
+void PanelSingle::stop() {
+    
 }
 
 //--------------------------------------------------------------
@@ -112,12 +73,4 @@ void PanelName::draw() {
 
 void PanelName::open() {
     
-}
-
-string PanelName::getName() {
-    return name;
-}
-
-ofVec2f PanelName::getPosition() {
-    return position;
 }

@@ -5,12 +5,21 @@ void ofApp::setup(){
     ofSetVerticalSync(true);
     isStopped = false;
     
-    grade = new PanelSingle("grade_panel.png", 0, 0, 240, 408);
-    major = new PanelSingle("major_panel.png", 240, 0, 240, 408);
-    name  = new PanelName(480, 0, 720, 408);
+    grade = new PanelSingle("grade_panel.png", 0, ofGetHeight()/2-1020, 240, 2040);
+    grade->c_panel = 1;
     
-    grade->img.resize(240, 2040);
-    major->img.resize(240, 2040);
+    
+//    major = new PanelSingle("major_panel.png", 240, 0, 240, 408);
+//    name  = new PanelName(480, 0, 720, 408);
+    
+    for (int i = 0; i < 2; i++) {
+        grade->fbo[i].allocate(240, 2040);
+//        major->fbo[i].allocate(240, 2040);
+        
+        grade->fbo[i].begin();
+        grade->img.draw(ofVec2f(0, 0), grade->width, grade->height);
+        grade->fbo[i].end();
+    }
     
     // csv file must be encoded by utf8 without bom
     ofBuffer buff = ofBufferFromFile("student_names.csv");
@@ -34,25 +43,21 @@ void ofApp::setup(){
 void ofApp::update(){
     // calculate size of panels
     if (isStopped) {
-
+        
     } else {
         if (isSpeedup) {
             grade->speedup();
-            major->speedup();
         } else {
             grade->slowdown();
-            major->slowdown();
         }
     }
     
-    grade->setCropPosition(grade->getCropPosition() + ofVec4f(0, grade->getVelocity(), 0, grade->getVelocity()));
-    major->setCropPosition(major->getCropPosition() + ofVec4f(0, major->getVelocity(), 0, major->getVelocity()));
+    grade->update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     grade->draw();
-    major->draw();
 }
 
 //--------------------------------------------------------------
@@ -74,9 +79,16 @@ void ofApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void ofApp::drawLot() {
-    std::shuffle(students.begin(), students.end(), std::mt19937());
-    auto s = students.back();
-    students.pop_back();
+    if (isSpeedup) {
+        // 止める
+    } else {
+        // 動かす
+        std::shuffle(students.begin(), students.end(), std::mt19937());
+        auto s = students.back();
+        students.pop_back();
+    }
+    
+    isSpeedup = !isSpeedup;
     
 //    cout << "------------------------" << endl;
 //    cout << s.name << endl;
