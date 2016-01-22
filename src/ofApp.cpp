@@ -47,9 +47,6 @@ void ofApp::update(){
     
     grade->setCropPosition(grade->getCropPosition() + ofVec4f(0, grade->getVelocity(), 0, grade->getVelocity()));
     major->setCropPosition(major->getCropPosition() + ofVec4f(0, major->getVelocity(), 0, major->getVelocity()));
-    
-    grade->img.crop(grade->getCropPosition().w, grade->getCropPosition().x, grade->getCropPosition().y, grade->getCropPosition().z);
-    major->img.crop(major->getCropPosition().w, major->getCropPosition().x, major->getCropPosition().y, major->getCropPosition().z);
 }
 
 //--------------------------------------------------------------
