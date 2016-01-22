@@ -9,6 +9,233 @@
 		<string>46</string>
 		<key>objects</key>
 		<dict>
+			<key>1B5F996886A777589D5DD794</key>
+			<dict>
+				<key>fileRef</key>
+				<string>077F7AC989DAB289A1EC643F</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>077F7AC989DAB289A1EC643F</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>svgtiny_list.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/libs/svgTiny/src/svgtiny_list.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>5F118C5DAAA61D8DB376BB3F</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>svgtiny_internal.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/libs/svgTiny/src/svgtiny_internal.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>4294163B15857489B2176769</key>
+			<dict>
+				<key>fileRef</key>
+				<string>582921BA98D224ED41833868</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>582921BA98D224ED41833868</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>svgtiny_gradient.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/libs/svgTiny/src/svgtiny_gradient.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>8AF5CDE1B5F658D7DE6849D5</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>svgtiny.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/libs/svgTiny/src/svgtiny.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>1D6B78EF041B097CE4F423C4</key>
+			<dict>
+				<key>fileRef</key>
+				<string>38BC601AD0A2F4F2319D1460</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>38BC601AD0A2F4F2319D1460</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>svgtiny.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/libs/svgTiny/src/svgtiny.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>5CE3B297CDC4075D3D2398C5</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>27DFA5E4C611C297AADB2002</string>
+					<string>38BC601AD0A2F4F2319D1460</string>
+					<string>8AF5CDE1B5F658D7DE6849D5</string>
+					<string>582921BA98D224ED41833868</string>
+					<string>5F118C5DAAA61D8DB376BB3F</string>
+					<string>077F7AC989DAB289A1EC643F</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>src</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>31941BAC71B339F7A3E32124</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>5CE3B297CDC4075D3D2398C5</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>svgTiny</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>BF0BF2682B4F1C8B2D7A515B</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>31941BAC71B339F7A3E32124</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>libs</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>6A565A9714A6A12EB9098F52</key>
+			<dict>
+				<key>fileRef</key>
+				<string>27DFA5E4C611C297AADB2002</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>27DFA5E4C611C297AADB2002</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>src_colors.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/libs/svgTiny/src/src_colors.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>E91F55DEDD14B7F4BACED9B4</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxSvg.h</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/src/ofxSvg.h</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>DBB3EF673AE7E843FD50910D</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>B9E16009E1772C6D00B20013</string>
+					<string>E91F55DEDD14B7F4BACED9B4</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>src</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>F5F1F1EF8441E64FD46F07C8</key>
+			<dict>
+				<key>children</key>
+				<array>
+					<string>DBB3EF673AE7E843FD50910D</string>
+					<string>BF0BF2682B4F1C8B2D7A515B</string>
+				</array>
+				<key>isa</key>
+				<string>PBXGroup</string>
+				<key>name</key>
+				<string>ofxSvg</string>
+				<key>sourceTree</key>
+				<string>&lt;group&gt;</string>
+			</dict>
+			<key>B88A57B4B0BA6191EF3571E9</key>
+			<dict>
+				<key>fileRef</key>
+				<string>B9E16009E1772C6D00B20013</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>B9E16009E1772C6D00B20013</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>ofxSvg.cpp</string>
+				<key>path</key>
+				<string>../../../addons/ofxSvg/src/ofxSvg.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>0A1DAC09F322AE313A40706D</key>
 			<dict>
 				<key>explicitFileType</key>
@@ -362,11 +589,49 @@
 				<key>sourceTree</key>
 				<string>SOURCE_ROOT</string>
 			</dict>
+			<key>3E0BC2F7F094DB77F42D9BDC</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.c.h</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>panel.hpp</string>
+				<key>path</key>
+				<string>src/panel.hpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
+			<key>74B3FFE163F11D0FB3C460C2</key>
+			<dict>
+				<key>fileRef</key>
+				<string>C784B0D1D4C7BCBEC04DA7E8</string>
+				<key>isa</key>
+				<string>PBXBuildFile</string>
+			</dict>
+			<key>C784B0D1D4C7BCBEC04DA7E8</key>
+			<dict>
+				<key>explicitFileType</key>
+				<string>sourcecode.cpp.cpp</string>
+				<key>fileEncoding</key>
+				<string>30</string>
+				<key>isa</key>
+				<string>PBXFileReference</string>
+				<key>name</key>
+				<string>panel.cpp</string>
+				<key>path</key>
+				<string>src/panel.cpp</string>
+				<key>sourceTree</key>
+				<string>SOURCE_ROOT</string>
+			</dict>
 			<key>BB4B014C10F69532006C3DED</key>
 			<dict>
 				<key>children</key>
 				<array>
 					<string>480A780D8D0308AE4A368801</string>
+					<string>F5F1F1EF8441E64FD46F07C8</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
@@ -531,7 +796,12 @@
 					<key>HEADER_SEARCH_PATHS</key>
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxSvg/libs</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny/src</string>
+						<string>../../../addons/ofxSvg/src</string>
 					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
@@ -589,7 +859,12 @@
 					<key>HEADER_SEARCH_PATHS</key>
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxSvg/libs</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny/src</string>
+						<string>../../../addons/ofxSvg/src</string>
 					</array>
 					<key>CONFIGURATION_BUILD_DIR</key>
 					<string>$(SRCROOT)/bin/</string>
@@ -646,6 +921,7 @@
 				<array>
 					<string>E4B69E200A3A1BDC003C02F2</string>
 					<string>E4B69E210A3A1BDC003C02F2</string>
+					<string>74B3FFE163F11D0FB3C460C2</string>
 					<string>856AA354D08AB4B323081444</string>
 					<string>5CBB2AB3A60F65431D7B555D</string>
 					<string>B266578FC55D23BFEBC042E7</string>
@@ -654,6 +930,11 @@
 					<string>837220E80EB56CD44AD27F2A</string>
 					<string>B56FE57CC35806596D38118C</string>
 					<string>1CD33E884D9E3358252E82A1</string>
+					<string>B88A57B4B0BA6191EF3571E9</string>
+					<string>6A565A9714A6A12EB9098F52</string>
+					<string>1D6B78EF041B097CE4F423C4</string>
+					<string>4294163B15857489B2176769</string>
+					<string>1B5F996886A777589D5DD794</string>
 				</array>
 				<key>isa</key>
 				<string>PBXSourcesBuildPhase</string>
@@ -737,7 +1018,12 @@
 					<key>HEADER_SEARCH_PATHS</key>
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxSvg/libs</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny/src</string>
+						<string>../../../addons/ofxSvg/src</string>
 					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>
@@ -785,7 +1071,12 @@
 					<key>HEADER_SEARCH_PATHS</key>
 					<array>
 						<string>$(OF_CORE_HEADERS)</string>
+						<string>src</string>
 						<string>../../../addons/ofxGui/src</string>
+						<string>../../../addons/ofxSvg/libs</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny</string>
+						<string>../../../addons/ofxSvg/libs/svgTiny/src</string>
+						<string>../../../addons/ofxSvg/src</string>
 					</array>
 					<key>COMBINE_HIDPI_IMAGES</key>
 					<string>YES</string>
@@ -831,6 +1122,8 @@
 					<string>E4B69E1D0A3A1BDC003C02F2</string>
 					<string>E4B69E1E0A3A1BDC003C02F2</string>
 					<string>E4B69E1F0A3A1BDC003C02F2</string>
+					<string>C784B0D1D4C7BCBEC04DA7E8</string>
+					<string>3E0BC2F7F094DB77F42D9BDC</string>
 				</array>
 				<key>isa</key>
 				<string>PBXGroup</string>
