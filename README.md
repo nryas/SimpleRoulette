@@ -8,6 +8,7 @@ XCode 7.2 と openFrameworks v0.90 を用いて開発しました．
 ### 手順
 * oF v0.90に以下のaddonを追加(projectGeneratorを使うと便利)
 * ofxTrueTypeFontUC / ofxGui
+* oF v0.90/app/myAppディレクトリなどにSimpleRouletteディレクトリを配置
 * dataディレクトリに名簿データであるCSVファイル（フォーマットは後述）を追加
 * dataディレクトリに任意のTrueTypeフォントのファイル（ファイル名"hiragino.ttc"）を追加
 * XCodeでビルド
