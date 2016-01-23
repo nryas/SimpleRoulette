@@ -37,5 +37,7 @@ class ofApp : public ofBaseApp{
         bool isSlowing;
     
         ofxTrueTypeFontUC font;
+        ofFbo frame_top;
+        ofFbo frame_bottom;
 
 };

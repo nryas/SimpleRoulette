@@ -12,6 +12,8 @@ void ofApp::setup(){
     
     grade->fbo.allocate(240, 2040);
     major->fbo.allocate(240, 2040);
+    frame_top.allocate(ofGetWidth(), ofGetHeight() * 0.1f);
+    frame_bottom.allocate(ofGetWidth(), ofGetHeight() * 0.1f);
     
     grade->fbo.begin();
     grade->img.draw(ofVec2f(0, 0), grade->width, grade->height);
@@ -20,6 +22,24 @@ void ofApp::setup(){
     major->fbo.begin();
     major->img.draw(ofVec2f(0, 0), major->width, major->height);
     major->fbo.end();
+    
+    frame_top.begin();
+    for (int y = 0; y < frame_top.getHeight(); y++) {
+        ofPushStyle();
+        ofSetColor(10, 10, 10, ofMap(y, 0, frame_top.getHeight(), 255, 0));
+        ofDrawLine(0, y, ofGetWidth(), y);
+        ofPopStyle();
+    }
+    frame_top.end();
+    
+    frame_bottom.begin();
+    for (int y = 0; y < frame_bottom.getHeight(); y++) {
+        ofPushStyle();
+        ofSetColor(10, 10, 10, ofMap(y, 0, frame_bottom.getHeight(), 0, 255));
+        ofDrawLine(0, y, ofGetWidth(), y);
+        ofPopStyle();
+    }
+    frame_bottom.end();
     
     // csv file must be encoded by utf8 without bom
     ofBuffer buff = ofBufferFromFile("student_names.csv");
@@ -50,22 +70,16 @@ void ofApp::update(){
     // 最後の減速
     if (isSlowing)
     {
-        float dist1 = grade->position.y - grade->index_pos[grade->target];
-        if (abs(dist1) > 2.0f) {
-            grade->position.y += abs(dist1) * 0.1f;
-            grade->velocity = 0;
+        grade->velocity = major->velocity = 0;
+        float dist = floor(grade->position.y - grade->index_pos[grade->target]);
+        if (abs(dist) > 0.8f) {
+            cout << abs(dist) << endl;
+            grade->position.y += abs(dist) * 0.1f;
+            major->position.y += abs(dist) * 0.1f;
         } else {
             grade->stop(lucky_student.grade);
-            isStoppedG = true;
-        }
-        
-        float dist2 = major->position.y - major->index_pos[major->target];
-        if (abs(dist2) > 2.0f) {
-            major->position.y += abs(dist2) * 0.1f;
-            major->velocity = 0;
-        } else {
             major->stop(lucky_student.major);
-            isStoppedM = true;
+            isStoppedG = isStoppedM = true;
         }
     }
     
@@ -74,21 +88,29 @@ void ofApp::update(){
             if (isSpeedup) {
                 if (grade->velocity < 100) {
                     grade->velocity += 5.0;
-                    major->velocity += 5.0;
                 } else {
                     grade->velocity = 100;
+                }
+                
+                if (major->velocity < 100) {
+                    major->velocity += 5.0;
+                } else {
                     major->velocity = 100;
                 }
             } else {
                 if (grade->velocity > 5.0) {
                     grade->velocity -= 5.0;
-                    major->velocity -= 5.0;
                 } else {
                     grade->velocity = 0;
+                }
+                
+                if (major->velocity > 5.0) {
+                    major->velocity -= 5.0;
+                } else {
                     major->velocity = 0;
                 }
             }
-            
+        
             grade->update();
             major->update();
     }
@@ -96,6 +118,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+//    if (isStoppedG && isStoppedM)
+//        grade->position.y = major->position.y;
     grade->draw();
     major->draw();
     if (isStoppedG && isStoppedM) {
@@ -117,7 +141,11 @@ void ofApp::draw(){
         ofPopStyle();
         font.drawString(lucky_student.name, 440 + (ofGetWidth() - 440)/2 - rect.getWidth()/2, ofGetHeight()/2 + font.getLineHeight()/2);
         ofPopStyle();
+
     }
+    
+    frame_top.draw(0, 0, ofGetWidth(), ofGetHeight() * 0.1);
+    frame_bottom.draw(0, ofGetHeight()*0.9+1, ofGetWidth(), ofGetHeight() * 0.1+1);
 }
 
 //--------------------------------------------------------------
@@ -142,6 +170,7 @@ void ofApp::windowResized(int w, int h){
     ofGetHeight()/2 - 408*5/2 + 408*4
     };
     std::memcpy(grade->index_pos, buff, sizeof(int)*5);
+    std::memcpy(major->index_pos, buff, sizeof(int)*5);
 }
 
 //--------------------------------------------------------------

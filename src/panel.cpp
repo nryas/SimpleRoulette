@@ -29,7 +29,7 @@ int PanelSingle::index_pos[] = {
 };
 
 void PanelSingle::update() {
-    position.y += velocity;
+    position.y += floor(velocity);
 }
 
 void PanelSingle::draw() {
