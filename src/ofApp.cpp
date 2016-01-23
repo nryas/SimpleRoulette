@@ -4,6 +4,8 @@
 void ofApp::setup(){
     ofSetVerticalSync(true);
     isStopped = true;
+    isSpeedup = false;
+    isSlowing = false;
     
     grade = new PanelSingle("grade_panel.png", 0, ofGetHeight()/2-1020, 240, 2040, 5.0f);
     major = new PanelSingle("major_panel.png", 240, ofGetHeight()/2-1020, 240, 2040, 5.0f);
@@ -25,7 +27,6 @@ void ofApp::setup(){
     // csv file must be encoded by utf8 without bom
     ofBuffer buff = ofBufferFromFile("student_names.csv");
     for (auto line: buff.getLines()) {
-        cout << line << endl;
         
         Student s;
         if (ofSplitString(line, ",").size() == 3) {
@@ -47,27 +48,44 @@ void ofApp::update(){
     
     isStopped = major->velocity == 0 ? true : false;
     
-    // calculate size of panels
-    if (isSpeedup) {
-        if (grade->velocity < 100) {
-            grade->velocity += 5.0;
-            major->velocity += 5.0;
+    if (!isSlowing) {
+        // calculate size of panels
+        if (isSpeedup) {
+            if (grade->velocity < 100) {
+                grade->velocity += 5.0;
+                major->velocity += 5.0;
+            } else {
+                grade->velocity = 100;
+                major->velocity = 100;
+            }
         } else {
-            grade->velocity = 100;
-            major->velocity = 100;
+            if (grade->velocity > 5.0) {
+                grade->velocity -= 5.0;
+                major->velocity -= 5.0;
+            } else {
+                grade->velocity = 0;
+                major->velocity = 0;
+            }
         }
+        
+        grade->update();
+        major->update();
     } else {
-        if (grade->velocity > 5.0) {
-            grade->velocity -= 5.0;
-            major->velocity -= 5.0;
-        } else {
+        float dist = grade->position.y - grade->index_pos[grade->target];
+//        cout << "----------------------" << endl;
+//        cout << grade->target << endl;
+//        cout << grade->position.y << endl;
+//        cout << grade->index_pos[grade->target] << endl;
+//        cout << dist << endl;
+        if (abs(dist) > 0) {
+            grade->position.y += abs(dist) * 0.1f;
             grade->velocity = 0;
-            major->velocity = 0;
+//            grade->position.y += grade->velocity;
+        } else {
+            grade->stop(lucky_student.grade);
+            isStopped = true;
         }
     }
-    
-    grade->update();
-    major->update();
     
     auto y = grade->position.y;
     auto s = "";
@@ -81,8 +99,6 @@ void ofApp::update(){
         s = "4";
     else if (y >= 792)
         s = "5";
-    
-    cout << s << endl;
 }
 
 //--------------------------------------------------------------
@@ -110,14 +126,25 @@ void ofApp::windowResized(int w, int h){
 
 //--------------------------------------------------------------
 void ofApp::drawLot() {
-    
-    if (isSpeedup) {
-        // 止める
-    } else {
-        // 動かす
-        std::shuffle(students.begin(), students.end(), std::mt19937());
-        auto s = students.back();
-        students.pop_back();
+    if (isSpeedup)
+    {
+        // 動いている -> 止める　場合
+        if (!isSlowing) {
+            isSlowing = true;
+            grade->brake(floor(ofRandom(1, 6)));
+        }
+    }
+    else
+    {
+        // 止まっている -> 動かす　場合
+        isSlowing = false;
+        isStopped = false;
+        if (students.size() > 0) {
+            std::shuffle(students.begin(), students.end(), std::mt19937());
+            lucky_student = students.back();
+            students.pop_back();
+        }
+        
     }
     
     isSpeedup = !isSpeedup;

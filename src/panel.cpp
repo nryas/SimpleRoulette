@@ -20,6 +20,8 @@ PanelSingle::PanelSingle(string _imgPath, int _x, int _y, float _width, float _h
     panel_id = 1;
 }
 
+const int PanelSingle::index_pos[] = {-636, -228, 180, 588, 996};
+
 void PanelSingle::update() {
     position.y += velocity;
 }
@@ -29,7 +31,6 @@ void PanelSingle::draw() {
         // 入れ替え前
         fbo.draw(position.x, position.y);
         fbo.draw(position.x, position.y - height);
-        cout << position.y << endl;
     } else {
         // 入れ替え後
         position.y -= height;
@@ -42,9 +43,17 @@ void PanelSingle::start() {
     
 }
 
+void PanelSingle::brake(int index) {
+    if (index > 0  && index <= 5) {
+        target = index - 1;
+        position.y = index_pos[target] - 500;
+    }
+}
+
 void PanelSingle::stop(int index) {
-    if (panel_id != index) {
-        position.y -= 0.1f;
+    if (index > 0 && index <= 5) {
+        position.y = index_pos[index-1];
+        velocity = 0;
     }
 }
 

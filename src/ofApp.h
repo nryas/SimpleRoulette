@@ -9,6 +9,13 @@
 class ofApp : public ofBaseApp{
 
 	public:
+    
+        struct Student {
+            int grade;
+            char major;
+            string name;
+        };
+    
 		void setup();
 		void update();
 		void draw();
@@ -17,14 +24,9 @@ class ofApp : public ofBaseApp{
 		void mousePressed(int x, int y, int button);
 		void windowResized(int w, int h);
         void drawLot();
-    
-        struct Student {
-            int grade;
-            char major;
-            string name;
-        };
 
         vector<Student> students;
+        Student lucky_student;
 
         PanelSingle *grade;
         PanelSingle *major;
@@ -32,5 +34,6 @@ class ofApp : public ofBaseApp{
 
         bool isStopped;
         bool isSpeedup;
+        bool isSlowing;
 
 };

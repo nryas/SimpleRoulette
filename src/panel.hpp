@@ -14,6 +14,7 @@ class PanelSingle {
         void draw();        // fboの描画
     
         void start();       // isSpeedupの切り替え
+        void brake(int index);  // 止めるまでの速度を遅くする
         void stop(int index);        // isSpeedupの切り替え・指定した場所で止める
     
         ofImage img;        // 画像
@@ -24,6 +25,8 @@ class PanelSingle {
         float height;       // fboの高さ 2040
         float velocity;     // update()時の移動量 0.1f
         unsigned int panel_id;       // 1 ~ 5 の値
+        static const int index_pos[];
+        int target;         // 止めたい場所
 };
 
 class PanelName {
