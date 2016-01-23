@@ -34,7 +34,9 @@ void ofApp::setup(){
         
         students.push_back(s);
     }
-    std::shuffle(students.begin(), students.end(), std::mt19937());
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::shuffle(students.begin(), students.end(), std::mt19937_64(seed));
     
     ofBackground(242);
     
@@ -151,7 +153,9 @@ void ofApp::drawLot() {
         isSlowing = false;
         isStoppedG = isStoppedM = false;
         if (students.size() > 0) {
-            std::shuffle(students.begin(), students.end(), std::mt19937());
+            unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+            cout << seed << endl;
+            std::shuffle(students.begin(), students.end(), std::mt19937_64(seed));
             lucky_student = students.back();
             students.pop_back();
         }
