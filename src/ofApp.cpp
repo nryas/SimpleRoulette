@@ -41,7 +41,7 @@ void ofApp::setup(){
     }
     frame_bottom.end();
     
-    // csv file must be encoded by utf8 without bom
+    // CSV ファイルはUTF-8 BOMなしでエンコードされている必要あり
     ofBuffer buff = ofBufferFromFile("student_names.csv");
     for (auto line: buff.getLines()) {
         
@@ -118,8 +118,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-//    if (isStoppedG && isStoppedM)
-//        grade->position.y = major->position.y;
     grade->draw();
     major->draw();
     if (isStoppedG && isStoppedM) {
