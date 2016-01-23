@@ -25,6 +25,6 @@ class PanelSingle {
         float height;
         float velocity;
         unsigned int panel_id;
-        static const int index_pos[];
+        static int index_pos[];
         int target;
 };

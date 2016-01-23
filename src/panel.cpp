@@ -20,14 +20,20 @@ PanelSingle::PanelSingle(string _imgPath, int _x, int _y, float _width, float _h
     panel_id = 1;
 }
 
-const int PanelSingle::index_pos[] = {-636, -228, 180, 588, 996};
+int PanelSingle::index_pos[] = {
+    -636,
+    -228,
+     180,
+     588,
+     996
+};
 
 void PanelSingle::update() {
     position.y += velocity;
 }
 
 void PanelSingle::draw() {
-    if (position.y < 1200) {
+    if (position.y < index_pos[4]) {
         // 入れ替え前
         fbo.draw(position.x, position.y);
         fbo.draw(position.x, position.y - height);

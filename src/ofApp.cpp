@@ -92,19 +92,6 @@ void ofApp::update(){
             grade->update();
             major->update();
     }
-    
-//    auto y = grade->position.y;
-//    auto s = "";
-//    if (y >= -840 && y < -432)
-//        s = "1";
-//    else if (y >= -432 && y < -24)
-//        s = "2";
-//    else if (y >= -24 && y < 384)
-//        s = "3";
-//    else if (y >= 384 && y < 792)
-//        s = "4";
-//    else if (y >= 792)
-//        s = "5";
 }
 
 //--------------------------------------------------------------
@@ -112,9 +99,23 @@ void ofApp::draw(){
     grade->draw();
     major->draw();
     if (isStoppedG && isStoppedM) {
+        auto rect = font.getStringBoundingBox(lucky_student.name, 0, 0);
         ofPushStyle();
-        ofSetColor(20);
-        font.drawString(lucky_student.name, 500, ofGetHeight()/2 + font.getLineHeight()/2);
+        ofSetColor(69);
+        for (int y = -7; y < 7; y++) {
+            for (int x = -7; x < 7; x++) {
+                font.drawString(lucky_student.name, 440 + (ofGetWidth() - 440)/2 - rect.getWidth()/2 + x, ofGetHeight()/2 + font.getLineHeight()/2 + y);
+            }
+        }
+        ofPushStyle();
+        ofSetColor(242);
+        for (int y = -2; y < 4; y++) {
+            for (int x = -2; x < 4; x++) {
+                font.drawString(lucky_student.name, 440 + (ofGetWidth() - 440)/2 - rect.getWidth()/2 + x, ofGetHeight()/2 + font.getLineHeight()/2 + y);
+            }
+        }
+        ofPopStyle();
+        font.drawString(lucky_student.name, 440 + (ofGetWidth() - 440)/2 - rect.getWidth()/2, ofGetHeight()/2 + font.getLineHeight()/2);
         ofPopStyle();
     }
 }
@@ -133,7 +134,14 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    int buff[5] = {
+    ofGetHeight()/2 - 408*5/2,
+    ofGetHeight()/2 - 408*5/2 + 408,
+    ofGetHeight()/2 - 408*5/2 + 408*2,
+    ofGetHeight()/2 - 408*5/2 + 408*3,
+    ofGetHeight()/2 - 408*5/2 + 408*4
+    };
+    std::memcpy(grade->index_pos, buff, sizeof(int)*5);
 }
 
 //--------------------------------------------------------------
@@ -153,11 +161,12 @@ void ofApp::drawLot() {
         isSlowing = false;
         isStoppedG = isStoppedM = false;
         if (students.size() > 0) {
-            unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-            cout << seed << endl;
-            std::shuffle(students.begin(), students.end(), std::mt19937_64(seed));
-            lucky_student = students.back();
-            students.pop_back();
+            do{
+                unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+                std::shuffle(students.begin(), students.end(), std::mt19937_64(seed));
+                lucky_student = students.back();
+                students.pop_back();
+            } while (lucky_student.name == "");
         }
         
     }
