@@ -9,14 +9,15 @@
 #include "panel.hpp"
 
 //--------------------------------------------------------------
-PanelSingle::PanelSingle(string _imgPath, int _x, int _y, float _width, float _height) {
+PanelSingle::PanelSingle(string _imgPath, int _x, int _y, float _width, float _height, float _velocity) {
     
     img.load(_imgPath);
     position = ofVec2f(_x, _y);
     
     width  = _width;
     height = _height;
-    velocity = 0.4f;
+    velocity = _velocity;
+    panel_id = 1;
 }
 
 void PanelSingle::update() {
@@ -24,29 +25,16 @@ void PanelSingle::update() {
 }
 
 void PanelSingle::draw() {
-    auto n_panel = c_panel > 0 ? 1 : 0;
-    if (position.y < ofGetHeight()) {
-        fbo[c_panel].draw(position.x, position.y);
-        fbo[n_panel].draw(position.x, position.y - height);
+    if (position.y < 1200) {
+        // 入れ替え前
+        fbo.draw(position.x, position.y);
+        fbo.draw(position.x, position.y - height);
+        cout << position.y << endl;
     } else {
-        auto buff = c_panel;
-        c_panel = n_panel;
-        n_panel = buff;
+        // 入れ替え後
         position.y -= height;
-        fbo[c_panel].draw(position.x, position.y - height);
-        fbo[n_panel].draw(position.x, position.y);
-    }
-}
-
-void PanelSingle::speedup() {
-    velocity += 0.4;
-}
-
-void PanelSingle::slowdown() {
-    if (velocity > 0.4) {
-        velocity -= 0.4;
-    } else {
-        velocity = 0;
+        fbo.draw(position.x, position.y - height);
+        fbo.draw(position.x, position.y);
     }
 }
 
@@ -54,8 +42,10 @@ void PanelSingle::start() {
     
 }
 
-void PanelSingle::stop() {
-    
+void PanelSingle::stop(int index) {
+    if (panel_id != index) {
+        position.y -= 0.1f;
+    }
 }
 
 //--------------------------------------------------------------
