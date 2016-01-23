@@ -47,6 +47,27 @@ void PanelSingle::brake(int index) {
     if (index > 0  && index <= 5) {
         target = index - 1;
         position.y = index_pos[target] - 500;
+    } else {
+        switch (index) {
+            case 'M':
+                target = 0;
+                break;
+            case 'E':
+                target = 1;
+                break;
+            case 'I':
+                target = 2;
+                break;
+            case 'C':
+                target = 3;
+                break;
+            case 'A':
+                target = 4;
+                break;
+            default:
+                break;
+        }
+        position.y = index_pos[target] - 500;
     }
 }
 
@@ -55,21 +76,4 @@ void PanelSingle::stop(int index) {
         position.y = index_pos[index-1];
         velocity = 0;
     }
-}
-
-//--------------------------------------------------------------
-PanelName::PanelName(int x, int y, float width, float height) {
-    this->position = ofVec2f(x, y);
-}
-
-void PanelName::update() {
-    
-}
-
-void PanelName::draw() {
-    
-}
-
-void PanelName::open() {
-    
 }

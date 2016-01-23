@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxSvg.h"
+#include "ofxTrueTypeFontUC.h"
 #include "panel.hpp"
 #include <algorithm>
 #include <random>
@@ -30,10 +30,12 @@ class ofApp : public ofBaseApp{
 
         PanelSingle *grade;
         PanelSingle *major;
-        PanelName   *name;
 
-        bool isStopped;
+        bool isStoppedG;
+        bool isStoppedM;
         bool isSpeedup;
         bool isSlowing;
+    
+        ofxTrueTypeFontUC font;
 
 };

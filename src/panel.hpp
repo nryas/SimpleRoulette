@@ -28,15 +28,3 @@ class PanelSingle {
         static const int index_pos[];
         int target;         // 止めたい場所
 };
-
-class PanelName {
-    public:
-        PanelName(int x, int y, float width, float height);
-        void update();
-        void draw();
-    
-        void open();
-
-        ofVec2f position;
-        string name;
-};
