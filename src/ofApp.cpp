@@ -71,18 +71,31 @@ void ofApp::update(){
         grade->update();
         major->update();
     } else {
-        float dist = grade->position.y - grade->index_pos[grade->target];
+        float dist1 = grade->position.y - grade->index_pos[grade->target];
 //        cout << "----------------------" << endl;
 //        cout << grade->target << endl;
 //        cout << grade->position.y << endl;
 //        cout << grade->index_pos[grade->target] << endl;
 //        cout << dist << endl;
-        if (abs(dist) > 0) {
-            grade->position.y += abs(dist) * 0.1f;
+        if (abs(dist1) > 0) {
+            grade->position.y += abs(dist1) * 0.1f;
             grade->velocity = 0;
-//            grade->position.y += grade->velocity;
         } else {
             grade->stop(lucky_student.grade);
+            isStopped = true;
+        }
+        
+        float dist2 = major->position.y - major->index_pos[major->target];
+        //        cout << "----------------------" << endl;
+        //        cout << grade->target << endl;
+        //        cout << grade->position.y << endl;
+        //        cout << grade->index_pos[grade->target] << endl;
+        //        cout << dist << endl;
+        if (abs(dist2) > 0) {
+            major->position.y += abs(dist2) * 0.1f;
+            major->velocity = 0;
+        } else {
+            major->stop(lucky_student.major);
             isStopped = true;
         }
     }
@@ -104,7 +117,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     grade->draw();
-//    major->draw();
+    major->draw();
 }
 
 //--------------------------------------------------------------
@@ -132,6 +145,7 @@ void ofApp::drawLot() {
         if (!isSlowing) {
             isSlowing = true;
             grade->brake(floor(ofRandom(1, 6)));
+            major->brake(floor(ofRandom(1, 6)));
         }
     }
     else
