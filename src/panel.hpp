@@ -14,8 +14,9 @@ class PanelSingle {
         void draw();
     
         void start();
-        void brake(int index);
-        void stop(int index);
+        void brake(int val);
+        void stop(int val);
+        int toIndex(int val);
     
         ofImage img;
         ofFbo fbo;

@@ -29,11 +29,11 @@ int PanelSingle::index_pos[] = {
 };
 
 void PanelSingle::update() {
-    position.y += floor(velocity);
+    position.y += velocity;
 }
 
 void PanelSingle::draw() {
-    if (position.y < index_pos[4]) {
+    if (position.y <= index_pos[4]) {
         // 入れ替え前
         fbo.draw(position.x, position.y);
         fbo.draw(position.x, position.y - height);
@@ -49,12 +49,20 @@ void PanelSingle::start() {
     
 }
 
-void PanelSingle::brake(int index) {
-    if (index > 0  && index <= 5) {
-        target = index - 1;
-        position.y = index_pos[target] - 500;
+void PanelSingle::brake(int val) {
+    position.y = index_pos[toIndex(val)] - 500;
+}
+
+void PanelSingle::stop(int val) {
+    position.y = index_pos[toIndex(val)];
+    velocity = 0;
+}
+
+int PanelSingle::toIndex(int value) {
+    if (value > 0  && value <= 5) {
+        target = value - 1;
     } else {
-        switch (index) {
+        switch (value) {
             case 'M':
                 target = 0;
                 break;
@@ -73,13 +81,7 @@ void PanelSingle::brake(int index) {
             default:
                 break;
         }
-        position.y = index_pos[target] - 500;
     }
-}
-
-void PanelSingle::stop(int index) {
-    if (index > 0 && index <= 5) {
-        position.y = index_pos[index-1];
-        velocity = 0;
-    }
+//    cout << target << endl;
+    return target;
 }
