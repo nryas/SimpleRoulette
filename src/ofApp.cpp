@@ -14,6 +14,7 @@ void ofApp::setup(){
     grade = new PanelSingle("grade_panel.png", 0, ofGetHeight()/2-IMG_HEIGHT/2, CHAR_WIDTH, IMG_HEIGHT, 5.0f);
     major = new PanelSingle("major_panel.png", CHAR_WIDTH, ofGetHeight()/2-IMG_HEIGHT/2, CHAR_WIDTH, IMG_HEIGHT, 5.0f);
     
+    // FBOの初期化
     grade->fbo.allocate(CHAR_WIDTH, IMG_HEIGHT);
     major->fbo.allocate(CHAR_WIDTH, IMG_HEIGHT);
     frame_top.allocate(ofGetWidth(), ofGetHeight() * 0.1f);
@@ -47,6 +48,13 @@ void ofApp::setup(){
     
     // CSV ファイルはUTF-8 BOMなしでエンコードされている必要あり
     ofBuffer buff = ofBufferFromFile("student_names.csv");
+    cout << buff.getText() << endl;
+
+    if (buff.getText() == "") {
+    ofSystemAlertDialog("名簿が書かれたCSVファイルが見つからなかったため，抽選を行えません。このアプリケーションと同一ディレクトリ内のdataディレクトリに[<学年>,<学科>,<名前>]のフォーマットで書かれたCSVファイルをstudent_names.csvとして保存し，やり直してください。");
+        ofExit();
+    }
+    
     for (auto line: buff.getLines()) {
         
         Student s;
@@ -54,6 +62,8 @@ void ofApp::setup(){
             s.grade = ofToInt(ofSplitString(line, ",")[0]);
             s.major = ofToChar(ofSplitString(line, ",")[1]);
             s.name  = ofSplitString(line, ",")[2];
+            
+            // 全角・半角スペースを消す
             ofStringReplace(s.name, "　", " ");
             ofStringReplace(s.name, " ", "");
             
@@ -69,6 +79,7 @@ void ofApp::setup(){
     ofBackground(242);
     
     font.loadFont("font.ttc", 120);
+    font_s.loadFont("font.ttc", 90);
 }
 
 //--------------------------------------------------------------
@@ -79,7 +90,7 @@ void ofApp::update(){
     if (isSlowing)
     {
         grade->velocity = major->velocity = 0;
-        float dist = grade->position.y - grade->index_pos[grade->target];
+        float dist = grade->position.y - grade->index_pos[grade->toIndex(lucky_student.grade)];
         if (abs(dist) > 1.0f) {
             grade->position.y += -dist * 0.1f;
             major->position.y += -dist * 0.1f;
@@ -110,23 +121,84 @@ void ofApp::draw(){
     grade->draw();
     major->draw();
     if (isStoppedG && isStoppedM) {
-        auto rect = font.getStringBoundingBox(lucky_student.name, 0, 0);
+        auto rect   = font.getStringBoundingBox(lucky_student.name, 0, 0);
+        auto rect_s = font_s.getStringBoundingBox(lucky_student.name, 0, 0);
+        
+        // フォントの輪郭の一番外側 (ダークグレー)
         ofPushStyle();
         ofSetColor(69);
         for (int y = -7; y < 7; y++) {
             for (int x = -7; x < 7; x++) {
-                font.drawString(lucky_student.name, CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect.getWidth()/2 + x, ofGetHeight()/2 + font.getLineHeight()/2 + y);
+                if (rect.width < ofGetWidth()-CHAR_WIDTH*2)
+                {
+                    font.drawString
+                    (
+                        lucky_student.name,
+                        CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect.getWidth()/2 + x,
+                        ofGetHeight()/2 + font.getLineHeight()/2 + y
+                    );
+                }
+                
+                else
+                {
+                    font_s.drawString
+                    (
+                      lucky_student.name,
+                      CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect_s.getWidth()/2 + x,
+                      ofGetHeight()/2 + font_s.getLineHeight()/2 + y
+                    );
+                }
             }
         }
+        
+        // フォントの輪郭の真ん中 (ライトグレー)
         ofPushStyle();
         ofSetColor(242);
         for (int y = -2; y < 3; y++) {
             for (int x = -2; x < 3; x++) {
-                font.drawString(lucky_student.name, CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect.getWidth()/2 + x, ofGetHeight()/2 + font.getLineHeight()/2 + y);
+                if (rect.width < ofGetWidth()-CHAR_WIDTH*2)
+                {
+                    font.drawString
+                    (
+                        lucky_student.name,
+                        CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect.getWidth()/2 + x,
+                        ofGetHeight()/2 + font.getLineHeight()/2 + y
+                    );
+                }
+                
+                else
+                {
+                    font_s.drawString
+                    (
+                        lucky_student.name,
+                        CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect_s.getWidth()/2 + x,
+                        ofGetHeight()/2 + font_s.getLineHeight()/2 + y
+                    );
+                }
             }
         }
+        
+        // フォントの輪郭の一番内側 (ダークグレー)
         ofPopStyle();
-        font.drawString(lucky_student.name, CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect.getWidth()/2, ofGetHeight()/2 + font.getLineHeight()/2);
+        if (rect.width < ofGetWidth()-CHAR_WIDTH*2)
+        {
+            font.drawString
+            (
+                lucky_student.name,
+                CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect.getWidth()/2,
+                ofGetHeight()/2 + font.getLineHeight()/2
+            );
+        }
+        
+        else
+        {
+            font_s.drawString
+            (
+                lucky_student.name,
+                CHAR_WIDTH*2 + (ofGetWidth() - CHAR_WIDTH*2)/2 - rect_s.getWidth()/2,
+                ofGetHeight()/2 + font_s.getLineHeight()/2
+            );
+        }
         ofPopStyle();
     }
     
@@ -138,9 +210,6 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     if (key == ' ') {
         drawLot();
-    } else if (key == 'p') {
-        cout << grade->position.y << endl;
-        cout << major->position.y << endl;
     }
 }
 

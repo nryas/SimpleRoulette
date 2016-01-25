@@ -59,6 +59,7 @@ void PanelSingle::stop(int val) {
 }
 
 int PanelSingle::toIndex(int value) {
+    int target;
     if (value > 0  && value <= 5) {
         target = value - 1;
     } else {
@@ -78,7 +79,23 @@ int PanelSingle::toIndex(int value) {
             case 'A':
                 target = 4;
                 break;
+            case 'm':
+                target = 0;
+                break;
+            case 'e':
+                target = 1;
+                break;
+            case 'i':
+                target = 2;
+                break;
+            case 'c':
+                target = 3;
+                break;
+            case 'a':
+                target = 4;
+                break;
             default:
+                target = 0;
                 break;
         }
     }

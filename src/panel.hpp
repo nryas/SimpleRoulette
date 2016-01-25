@@ -27,5 +27,4 @@ class PanelSingle {
         float velocity;
         unsigned int panel_id;
         static int index_pos[];
-        int target;
 };
