@@ -48,8 +48,6 @@ void ofApp::setup(){
     
     // CSV ファイルはUTF-8 BOMなしでエンコードされている必要あり
     ofBuffer buff = ofBufferFromFile("student_names.csv");
-    cout << buff.getText() << endl;
-
     if (buff.getText() == "") {
     ofSystemAlertDialog("名簿が書かれたCSVファイルが見つからなかったため，抽選を行えません。このアプリケーションと同一ディレクトリ内のdataディレクトリに[<学年>,<学科>,<名前>]のフォーマットで書かれたCSVファイルをstudent_names.csvとして保存し，やり直してください。");
         ofExit();
@@ -210,6 +208,10 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     if (key == ' ') {
         drawLot();
+    } else if (key == 's') {
+        ofImage screenShot;
+        screenShot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
+        screenShot.save("screen_shot.png");
     }
 }
 

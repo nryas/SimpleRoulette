@@ -99,6 +99,5 @@ int PanelSingle::toIndex(int value) {
                 break;
         }
     }
-//    cout << target << endl;
     return target;
 }
