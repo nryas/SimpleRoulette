@@ -44,7 +44,6 @@ class ofApp : public ofBaseApp{
         ofFbo frame_top;
         ofFbo frame_bottom;
     
-//        void newResponse(ofxHttpResponse & response);
         ofxHttpUtils httpUtils;
         string action_url;
     

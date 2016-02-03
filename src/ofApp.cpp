@@ -81,8 +81,6 @@ void ofApp::setup(){
     font_s.loadFont("font.ttc", 90);
     
 //    action_url = "http://localhost:3000/";
-    action_url = "http://dorm.azurewebsites.net/";
-//    ofAddListener(httpUtils.newResponseEvent,this,&ofApp::newResponse);
     httpUtils.start();
     
     mainOutputSyphonServer.setName("Screen Output");
