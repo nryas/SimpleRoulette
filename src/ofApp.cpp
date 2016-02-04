@@ -10,6 +10,7 @@ void ofApp::setup(){
     isStoppedG = isStoppedM = false;
     isSpeedup = false;
     isSlowing = false;
+    isImgSent = false;
     
     grade = new PanelSingle("grade_panel.png", 0, ofGetHeight()/2-IMG_HEIGHT/2, CHAR_WIDTH, IMG_HEIGHT, 5.0f);
     major = new PanelSingle("major_panel.png", CHAR_WIDTH, ofGetHeight()/2-IMG_HEIGHT/2, CHAR_WIDTH, IMG_HEIGHT, 5.0f);
@@ -78,6 +79,8 @@ void ofApp::setup(){
     
     font.loadFont("font.ttc", 120);
     font_s.loadFont("font.ttc", 90);
+    
+    mainOutputSyphonServer.setName("Screen Output");
 }
 
 //--------------------------------------------------------------
@@ -118,7 +121,11 @@ void ofApp::update(){
 void ofApp::draw(){
     grade->draw();
     major->draw();
+    frame_top.draw(0, 0, ofGetWidth(), ofGetHeight() * 0.1);
+    frame_bottom.draw(0, ofGetHeight()*0.9+1, ofGetWidth(), ofGetHeight() * 0.1+1);
+    
     if (isStoppedG && isStoppedM) {
+        
         auto rect   = font.getStringBoundingBox(lucky_student.name, 0, 0);
         auto rect_s = font_s.getStringBoundingBox(lucky_student.name, 0, 0);
         
@@ -200,18 +207,13 @@ void ofApp::draw(){
         ofPopStyle();
     }
     
-    frame_top.draw(0, 0, ofGetWidth(), ofGetHeight() * 0.1);
-    frame_bottom.draw(0, ofGetHeight()*0.9+1, ofGetWidth(), ofGetHeight() * 0.1+1);
+    mainOutputSyphonServer.publishScreen();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     if (key == ' ') {
         drawLot();
-    } else if (key == 's') {
-        ofImage screenShot;
-        screenShot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
-        screenShot.save("screen_shot.png");
     }
 }
 
@@ -247,6 +249,7 @@ void ofApp::drawLot() {
     }
     else
     {
+        isImgSent = false;
         // 止まっている -> 動かす
         isSlowing = false;
         isStoppedG = isStoppedM = false;
