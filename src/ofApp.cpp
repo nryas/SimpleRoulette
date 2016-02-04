@@ -80,9 +80,6 @@ void ofApp::setup(){
     font.loadFont("font.ttc", 120);
     font_s.loadFont("font.ttc", 90);
     
-//    action_url = "http://localhost:3000/";
-    httpUtils.start();
-    
     mainOutputSyphonServer.setName("Screen Output");
 }
 
@@ -208,21 +205,6 @@ void ofApp::draw(){
             );
         }
         ofPopStyle();
-        
-        
-        if (!isImgSent) {
-//            ofImage screenShot;
-//            screenShot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
-//            screenShot.save("screen_shot.png");
-
-            ofxHttpForm form;
-            form.action = action_url;
-            form.method = OFX_HTTP_POST;
-            form.addFormField("name_updated", lucky_student.name);
-//            form.addFile("uploaded","screen_shot.png");
-            httpUtils.addForm(form);
-            isImgSent = true;
-        }
     }
     
     mainOutputSyphonServer.publishScreen();

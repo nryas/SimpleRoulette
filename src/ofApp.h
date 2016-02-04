@@ -44,9 +44,6 @@ class ofApp : public ofBaseApp{
         ofFbo frame_top;
         ofFbo frame_bottom;
     
-        ofxHttpUtils httpUtils;
-        string action_url;
-    
     	ofxSyphonServer mainOutputSyphonServer;
 
 };
