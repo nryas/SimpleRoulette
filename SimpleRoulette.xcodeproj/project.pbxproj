@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6E8E57181C5B2D90004BF6B4 /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E8E57161C5B2D90004BF6B4 /* ofxTrueTypeFontUC.cpp */; };
-		6E8E57301C5F24F1004BF6B4 /* ofxHttpUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E8E572E1C5F1F8C004BF6B4 /* ofxHttpUtils.cpp */; };
 		6E8E576B1C5FAF7E004BF6B4 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8E57571C5FAF68004BF6B4 /* Syphon.framework */; };
 		6E8E576C1C5FAF7E004BF6B4 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E8E57571C5FAF68004BF6B4 /* Syphon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6E8E576D1C5FB03B004BF6B4 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8E575A1C5FAF68004BF6B4 /* SyphonNameboundClient.m */; };
@@ -55,9 +54,6 @@
 		3E0BC2F7F094DB77F42D9BDC /* panel.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = panel.hpp; path = src/panel.hpp; sourceTree = SOURCE_ROOT; };
 		6E8E57161C5B2D90004BF6B4 /* ofxTrueTypeFontUC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTrueTypeFontUC.cpp; sourceTree = "<group>"; };
 		6E8E57171C5B2D90004BF6B4 /* ofxTrueTypeFontUC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTrueTypeFontUC.h; sourceTree = "<group>"; };
-		6E8E572D1C5F1F8C004BF6B4 /* ofxHttpTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxHttpTypes.h; sourceTree = "<group>"; };
-		6E8E572E1C5F1F8C004BF6B4 /* ofxHttpUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxHttpUtils.cpp; sourceTree = "<group>"; };
-		6E8E572F1C5F1F8C004BF6B4 /* ofxHttpUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxHttpUtils.h; sourceTree = "<group>"; };
 		6E8E57571C5FAF68004BF6B4 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
 		6E8E57591C5FAF68004BF6B4 /* SyphonNameboundClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SyphonNameboundClient.h; sourceTree = "<group>"; };
 		6E8E575A1C5FAF68004BF6B4 /* SyphonNameboundClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SyphonNameboundClient.m; sourceTree = "<group>"; };
@@ -97,25 +93,6 @@
 			children = (
 			);
 			name = local_addons;
-			sourceTree = "<group>";
-		};
-		6E8E571E1C5F1F8C004BF6B4 /* ofxHttpUtils */ = {
-			isa = PBXGroup;
-			children = (
-				6E8E572C1C5F1F8C004BF6B4 /* src */,
-			);
-			name = ofxHttpUtils;
-			path = ../../../addons/ofxHttpUtils;
-			sourceTree = "<group>";
-		};
-		6E8E572C1C5F1F8C004BF6B4 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				6E8E572D1C5F1F8C004BF6B4 /* ofxHttpTypes.h */,
-				6E8E572E1C5F1F8C004BF6B4 /* ofxHttpUtils.cpp */,
-				6E8E572F1C5F1F8C004BF6B4 /* ofxHttpUtils.h */,
-			);
-			path = src;
 			sourceTree = "<group>";
 		};
 		6E8E57341C5FAF68004BF6B4 /* ofxSyphon */ = {
@@ -188,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				6E8E57341C5FAF68004BF6B4 /* ofxSyphon */,
-				6E8E571E1C5F1F8C004BF6B4 /* ofxHttpUtils */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -331,7 +307,6 @@
 				6E8E57181C5B2D90004BF6B4 /* ofxTrueTypeFontUC.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				6E8E57301C5F24F1004BF6B4 /* ofxHttpUtils.cpp in Sources */,
 				74B3FFE163F11D0FB3C460C2 /* panel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,7 +406,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
-					../../../addons/ofxHttpUtils/src,
 					../../../addons/ofxSyphon/libs,
 					../../../addons/ofxSyphon/libs/Syphon,
 					../../../addons/ofxSyphon/libs/Syphon/lib,
@@ -467,7 +441,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
-					../../../addons/ofxHttpUtils/src,
 					../../../addons/ofxSyphon/libs,
 					../../../addons/ofxSyphon/libs/Syphon,
 					../../../addons/ofxSyphon/libs/Syphon/lib,

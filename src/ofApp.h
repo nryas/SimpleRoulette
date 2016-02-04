@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxTrueTypeFontUC.h"
-#include "ofxHttpUtils.h"
 #include "ofxSyphon.h"
 #include "panel.hpp"
 #include <algorithm>
