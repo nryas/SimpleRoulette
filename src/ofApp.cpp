@@ -79,8 +79,6 @@ void ofApp::setup(){
     
     font.loadFont("font.ttc", 120);
     font_s.loadFont("font.ttc", 90);
-    
-    mainOutputSyphonServer.setName("Screen Output");
 }
 
 //--------------------------------------------------------------
@@ -206,8 +204,6 @@ void ofApp::draw(){
         }
         ofPopStyle();
     }
-    
-    mainOutputSyphonServer.publishScreen();
 }
 
 //--------------------------------------------------------------

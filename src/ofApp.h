@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxTrueTypeFontUC.h"
-#include "ofxSyphon.h"
 #include "panel.hpp"
 #include <algorithm>
 #include <random>
@@ -42,7 +41,5 @@ class ofApp : public ofBaseApp{
         ofxTrueTypeFontUC font_s;
         ofFbo frame_top;
         ofFbo frame_bottom;
-    
-    	ofxSyphonServer mainOutputSyphonServer;
 
 };
